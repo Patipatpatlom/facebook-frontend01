@@ -12,6 +12,7 @@ import {
   ShopIcon,
 } from "../icons";
 import { Link } from "react-router";
+import Avatar from "./Avatar";
 
 function Header() {
   const logout = useUserStore((state) => state.logout);
@@ -47,7 +48,7 @@ function Header() {
           <ShopIcon className="w-1/2" />
         </Link>
         <Link
-          to="/"
+          to="/friends"
           className="flex justify-center w-20 hover:outline-2 hover:outline-blue-900"
         >
           <FriendsIcon className="w-1/2" />
@@ -69,6 +70,18 @@ function Header() {
           <div className="w-10 h-10 rounded-full flex! justify-center items-center bg-gray-300 hover:bg-gray-400">
             <NotificationIcon className="w-5" />
           </div>
+        </div>
+        <div className="dropdown dropdown-end">
+          <div tabIndex={0} role="button" className="btn m-1 btn-circle">
+            <Avatar menu right="-10" bottom="-10" imgSrc={user.profileImage} />
+          </div>
+          <ul
+            tabIndex={0}
+            className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+          >
+            <li><Link to="/profile">Profile</Link></li>
+            <li><a onClick={logout}>Logout</a></li>
+          </ul>
         </div>
       </div>
     </div>
