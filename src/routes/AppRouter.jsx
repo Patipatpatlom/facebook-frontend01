@@ -14,6 +14,9 @@ import {
   Outlet,
   RouterProvider,
 } from "react-router";
+import useUserStore from "../stores/userStore";
+import UserLayout from "../layouts/UserLayout";
+
 
 const commonPath = [{ path: "/share", Component: ShareInfo }];
 
@@ -25,19 +28,11 @@ const guestRouter = createBrowserRouter([
 
 const userRouter = createBrowserRouter([
   {
-    path: "/",
-    element: (
-      <>
-        <div className="py-4 border">Header</div>
-
-        <Outlet />
-      </>
-    ),
+    path: "/",Component:UserLayout,
     children: [
       { index: true, Component: Home },
       { path: "friends", Component: Friends },
       { path: "profile", Component: Profile },
-      { path: "login", Component: Login },
       { path: "*", element: <Navigate to="/" /> },
       ...commonPath,
     ],
@@ -45,14 +40,13 @@ const userRouter = createBrowserRouter([
 ]);
 
 function AppRouter() {
-  const user = null
-  // const user = { email: "andy@ggg.mail" };
+  const user = useUserStore(state => state.user)
   const finalRouter = user ? userRouter : guestRouter;
   return (
     <Suspense
       fallback={<span className="loading loading-spinner loading-xl"></span>}
     >
-      <RouterProvider router={finalRouter} />
+       <RouterProvider key={user?.id} router={finalRouter} />
     </Suspense>
   );
 }

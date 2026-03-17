@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 import useUserStore from "../stores/userStore";
 
 function Login() {
-  const token = useUserStore(state => state.token);
-  const user = useUserStore(state => state.user)
+  // const user = useUserStore(state => state.user)
   const login = useUserStore(state => state.login);
   const { register, handleSubmit, formState, reset } = useForm({
     resolver: zodResolver(loginSchema),
@@ -20,7 +19,7 @@ function Login() {
     try {
       await new Promise(resolve => setTimeout(resolve, 1000))
       const resp = await login(body);
-      toast.success(resp.data.message);
+      // toast.success(resp.data.message);
     } catch (err) {
       console.dir(err);
       const errMsg = err.response?.data.message || err.message;
@@ -70,7 +69,7 @@ function Login() {
               </svg>
               This is not real Facebook!
             </div>
-            <p className="text-5xl text-blue-600 font-bold">Hello,{user?.firstName}</p>
+            {/* <p className="text-5xl text-blue-600 font-bold">Hello,{user?.firstName}</p> */}
             <input
               type="checkbox"
               value="dark"
@@ -118,7 +117,7 @@ function Login() {
                     </p>
                     <div className="divider my-0"></div>
                     <button
-                      className="btn btn-primary"
+                      className="btn btn-secondary"
                       onClick={() =>
                         document.getElementById("register-form").showModal()
                       }
