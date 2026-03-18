@@ -24,7 +24,7 @@ export const createPost = (body) => mainApi.post("/post", body);
 
 export const getAllPosts = () => mainApi.get("/post");
 
-export const deletePost = (id) => mainApi.delete(`/post${id}`);
+export const deletePost = (id) => mainApi.delete(`/post/${id}`);
 
 export const updatePost = (id, body) => mainApi.put(`/post/${id}`, body);
 
